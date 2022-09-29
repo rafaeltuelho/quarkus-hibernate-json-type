@@ -1,6 +1,6 @@
 quarkus:
   log:
-    level: INFO
+    level: DEBUG
     category:
       "org.acme":
         level: DEBUG

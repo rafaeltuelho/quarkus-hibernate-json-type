@@ -14,20 +14,19 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import io.quarkiverse.hibernate.types.json.JsonBinaryType;
 import io.quarkiverse.hibernate.types.json.JsonType;
 import io.quarkiverse.hibernate.types.json.JsonTypes;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * JPA entity class for a Hero. Re-used in the API layer.
  */
-@TypeDefs({
-	@TypeDef(name = JsonTypes.JSON, typeClass = JsonType.class),
-	@TypeDef(name = JsonTypes.JSON_BIN, typeClass = JsonBinaryType.class)
-})
+@TypeDef(name = JsonTypes.JSON, typeClass = JsonType.class)
+@TypeDef(name = JsonTypes.JSON_BIN, typeClass = JsonBinaryType.class)
 @Entity
+@RegisterForReflection
 public class Hero {
 	@Id
 	@GeneratedValue
@@ -45,8 +44,11 @@ public class Hero {
 
 	private String picture;
 
-	@Type(type = JsonTypes.JSON_BIN)
-	@Column(columnDefinition = JsonTypes.JSON_BIN)
+	// @Type(type = JsonTypes.JSON_BIN)
+	// @Column(columnDefinition = JsonTypes.JSON_BIN)
+	// private Power powers;
+	@Type(type = JsonTypes.JSON)
+	@Column(columnDefinition = "text")
 	private List<Power> powers = new ArrayList<>();
 
 	public Long getId() {
@@ -90,10 +92,12 @@ public class Hero {
 	}
 
 	public List<Power> getPowers() {
+	// public Power getPowers() {
 		return this.powers;
 	}
 
 	public void setPowers(List<Power> powers) {
+	// public void setPowers(Power powers) {
 		this.powers = powers;
 	}
 

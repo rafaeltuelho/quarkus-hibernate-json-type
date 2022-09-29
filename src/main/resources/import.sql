@@ -29,3 +29,17 @@ nextval('hibernate_sequence'),
       "description": "The ability to act unrestrained by conventional cause and effect, on a scale that varies depending on the character. For some characters, this means not being affected by changes to the past; for others, this means defying all logic and acting with disregard for traditional causality."
     }]', 
     30);
+-- INSERT INTO hero(id, name, otherName, picture, powers, level)
+-- VALUES (
+-- nextval('hibernate_sequence'),
+--   'Chewbacca', 
+--   '', 
+--   'https://raw.githubusercontent.com/quarkusio/quarkus-super-heroes/characterdata/images/chewbacca--684239239428094811.jpg', 
+--   '{
+--       "name": "Ability Shift",
+--       "tier": "Base",
+--       "score": 5,
+--       "aliases": null,
+--       "description": "Ability shift is the power to use a variety of powers through natural or artificial means. The drawback is that it is usually impossible to use two powers at once."
+--     }',
+--     30);

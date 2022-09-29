@@ -2,6 +2,9 @@ package org.acme;
 
 import java.io.Serializable;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
 public class Power implements Serializable {
   private String name;
   private String tier;
