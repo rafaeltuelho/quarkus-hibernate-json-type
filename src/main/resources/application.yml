@@ -6,8 +6,10 @@ quarkus:
         level: DEBUG
     console:
       format: "%d{HH:mm:ss} [%c{2.}] (%t) %s%e%n"
-      level: INFO
+      level: DEBUG
       darken: 1
+  datasource:
+    jdbc: false
   hibernate-orm:
     log:
       sql: true

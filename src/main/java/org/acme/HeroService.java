@@ -32,7 +32,6 @@ public class HeroService {
 
 	public Uni<List<Hero>> findAllHeroes() {
     Log.debug("Getting all heroes");
-		// return Uni.createFrom().item(this.heroRepository.listAll());
 		return this.heroRepository.listAll();
 	}
 
@@ -43,7 +42,6 @@ public class HeroService {
 
 	public Uni<Hero> findHeroById(Long id) {
     Log.debugf("Finding hero by id = %d", id);
-		// return Uni.createFrom().item(this.heroRepository.findById(id));
 		return this.heroRepository.findById(id);
 	}
 
@@ -52,11 +50,9 @@ public class HeroService {
 		return this.heroRepository.findRandom();
 	}
 
-	// @Transactional
 	@ReactiveTransactional
 	public Uni<Hero> persistHero(@NotNull @Valid Hero hero) {
     Log.debugf("Persisting hero: %s", hero);
-		// return Uni.createFrom().item(hero);
 		return this.heroRepository.persist(hero);
 	}
 
@@ -81,7 +77,6 @@ public class HeroService {
 	// 		.onItem().ifNotNull().transform(this::validatePartialUpdate);
 	// }
 
-  // @Transactional
 	@ReactiveTransactional
   public Uni<Void> replaceAllHeroes(List<Hero> heroes) {
     Log.debug("Replacing all heroes");
@@ -106,11 +101,9 @@ public class HeroService {
 	// 	return hero;
 	// }
 
-	// @Transactional
 	@ReactiveTransactional
 	public Uni<Void> deleteAllHeroes() {
     Log.debug("Deleting all heroes");
-		// return Uni.createFrom().item(this.heroRepository.listAll())
 		return this.heroRepository.listAll()
 			.onItem().transformToMulti(list -> Multi.createFrom().iterable(list))
 			.map(Hero::getId)
@@ -122,7 +115,6 @@ public class HeroService {
 	@Transactional
 	public Uni<Void> deleteHero(Long id) {
     Log.debugf("Deleting hero by id = %d", id);
-		// return Uni.createFrom().voidItem();
 		return this.heroRepository.deleteById(id).replaceWithVoid();
 	}
 }

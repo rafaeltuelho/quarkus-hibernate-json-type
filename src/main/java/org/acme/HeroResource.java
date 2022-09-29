@@ -36,7 +36,6 @@ public class HeroResource {
 
 	@GET
 	@Path("/random")
-    // @Blocking
 	public Uni<Response> getRandomHero() {
 		return this.heroService.findRandomHero()
 			.onItem().ifNotNull().transform(h -> {
@@ -50,7 +49,6 @@ public class HeroResource {
 	}
 
 	@GET
-    // @Blocking
 	public Uni<List<Hero>> getAllHeroes(@QueryParam("name_filter") Optional<String> nameFilter) {
     return nameFilter
       .map(this.heroService::findAllHeroesHavingName)
@@ -60,7 +58,6 @@ public class HeroResource {
 
 	@GET
 	@Path("/{id}")
-    // @Blocking
 	public Uni<Response> getHero(@PathParam("id") Long id) {
 		return this.heroService.findHeroById(id)
 			.onItem().ifNotNull().transform(h -> {
@@ -75,7 +72,7 @@ public class HeroResource {
 
 	@POST
 	@Consumes(APPLICATION_JSON)
-    // @Blocking
+    @Produces(APPLICATION_JSON)
 	public Uni<Response> createHero(@Valid @NotNull Hero hero, @Context UriInfo uriInfo) {
 		return this.heroService.persistHero(hero)
 			.map(h -> {
