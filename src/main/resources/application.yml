@@ -1,0 +1,32 @@
+quarkus:
+  log:
+    level: INFO
+    category:
+      "org.acme":
+        level: DEBUG
+    console:
+      format: "%d{HH:mm:ss} [%c{2.}] (%t) %s%e%n"
+      level: INFO
+      darken: 1
+  hibernate-orm:
+    log:
+      sql: true
+      format-sql: true
+      bind-param: true
+    database:
+      generation: drop-and-create
+  http:
+    cors: true
+    port: 8080
+    test-port: 0
+  jackson:
+    serialization-inclusion: non-empty
+  smallrye-openapi:
+    info-title: Hero API
+    info-description: This API allows CRUD operations on a hero
+    info-version: 1.0
+    info-contact-name: Quarkus
+    info-contact-url: https://github.com/quarkusio
+    servers: "http://localhost:${quarkus.http.port}"
+  swagger-ui:
+    always-include: true
