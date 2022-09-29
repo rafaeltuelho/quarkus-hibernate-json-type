@@ -22,7 +22,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.jboss.logging.Logger;
 
-import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 
 @Path("/hero")
@@ -37,7 +36,7 @@ public class HeroResource {
 
 	@GET
 	@Path("/random")
-    @Blocking
+    // @Blocking
 	public Uni<Response> getRandomHero() {
 		return this.heroService.findRandomHero()
 			.onItem().ifNotNull().transform(h -> {
@@ -51,7 +50,7 @@ public class HeroResource {
 	}
 
 	@GET
-    @Blocking
+    // @Blocking
 	public Uni<List<Hero>> getAllHeroes(@QueryParam("name_filter") Optional<String> nameFilter) {
     return nameFilter
       .map(this.heroService::findAllHeroesHavingName)
@@ -61,7 +60,7 @@ public class HeroResource {
 
 	@GET
 	@Path("/{id}")
-    @Blocking
+    // @Blocking
 	public Uni<Response> getHero(@PathParam("id") Long id) {
 		return this.heroService.findHeroById(id)
 			.onItem().ifNotNull().transform(h -> {
@@ -76,7 +75,7 @@ public class HeroResource {
 
 	@POST
 	@Consumes(APPLICATION_JSON)
-    @Blocking
+    // @Blocking
 	public Uni<Response> createHero(@Valid @NotNull Hero hero, @Context UriInfo uriInfo) {
 		return this.heroService.persistHero(hero)
 			.map(h -> {
